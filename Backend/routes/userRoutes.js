@@ -9,7 +9,10 @@ router.post('/register',[body('email').isEmail().withMessage('Invalid email addr
     body('fullname.lastname').notEmpty().withMessage('Lastname is required')
     
 ], userController.register);
-// router.post('/login', userController.login);
+
+router.post('/login',[body('email').isEmail().withMessage('Invalid email address'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+], userController.login);
 // router.get('/profile', userController.getProfile);
 
 module.exports=router;
