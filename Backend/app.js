@@ -4,6 +4,8 @@ const express=require('express');
 const app=express();
 const connectDB=require('./db/db');
 const userRoutes=require('./routes/userRoutes');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 
 connectDB();
