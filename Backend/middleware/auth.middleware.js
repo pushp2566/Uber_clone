@@ -52,9 +52,18 @@ module.exports.authCaptain = async (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         console.log('decoded token:', decoded);
+        console.log('Looking for captain with _id:', decoded._id);
+        console.log('_id type:', typeof decoded._id);
+        console.log('_id value:', decoded._id);
+        
+        console.log('About to query database...');
         const captain = await captainModel.findById(decoded._id);
+       // console.log('Database query completed');
+        //console.log('Found captain:', captain ? 'YES' : 'NO');
+        //console.log('Captain object:', captain);
 
         if (!captain) {
+           // console.log('Captain not found in database with _id:', decoded._id);
             return res.status(401).json({ message: 'Unauthorized3' });
         }
 

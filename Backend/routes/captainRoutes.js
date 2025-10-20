@@ -25,7 +25,21 @@ router.post('/login', [
 
 // Protected routes can use auth middleware (not added here)
 router.get('/profile', authMiddleware.authCaptain, captainController.getProfile);
-// router.post('/logout', authMiddleware.authCaptain, captainController.logout);
+ router.post('/logout', authMiddleware.authCaptain, captainController.logout);
+
+// Debug route to test captain lookup
+// router.get('/debug/:id', async (req, res) => {
+// 	try {
+// 		const captainModel = require('../models/captain.model');
+// 		const captain = await captainModel.findById(req.params.id);
+// 		res.json({ 
+// 			found: !!captain, 
+// 			captain: captain ? { _id: captain._id, email: captain.email } : null 
+// 		});
+// 	} catch (err) {
+// 		res.status(500).json({ error: err.message });
+// 	}
+// });
 
 module.exports = router;
 
