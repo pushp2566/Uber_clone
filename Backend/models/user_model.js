@@ -13,16 +13,11 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.generateAuthToken = function () {
-    const secret = process.env.JWT_SECRET || null;
+    const secret = process.env.JWT_SECRET;
     if (!secret) {
-        console.warn('JWT_SECRET is not set. Generating token with null secret will fail in production.');
+        throw new Error('JWT_SECRET is not set. Set JWT_SECRET in your environment to generate tokens.');
     }
-    const token = jwt.sign(
-        { _id: this._id },
-        secret,
-        { expiresIn: '1h' }
-    );
-    return token;
+    return jwt.sign({ _id: this._id }, secret, { expiresIn: '24h' });
 };
 
 userSchema.methods.comparePassword = async function (password) {

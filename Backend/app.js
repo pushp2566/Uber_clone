@@ -4,6 +4,7 @@ const express=require('express');
 const app=express();
 const connectDB=require('./db/db');
 const userRoutes=require('./routes/userRoutes');
+const captainRoutes=require('./routes/captainRoutes');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRoutes);
+app.use('/captains', captainRoutes);
 
 
 app.get('/',(req,res)=>{
